@@ -21,13 +21,21 @@ RUN apt-get install -y --allow-unauthenticated \
     nodejs \
     dotnet-runtime-2.0.0 \
     dotnet-sdk-2.0.2 \
-    azure-cli
+    azure-cli \
+    nginx
 
 # install the azure function tooling
 RUN npm install -g azure-functions-core-tools@core --unsafe-perm true
+
+# providing a configuration to redirect 8080 to 8071 because nginx will listen on all network interfaces
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # create a working directory
 VOLUME /app
 WORKDIR /app
 
-EXPOSE 7071
+# Hence usually functions use port 7071. Using nginx to redirect as stated above
+EXPOSE 8080
+
+# start nginx in the beginning and then stick to the bash
+ENTRYPOINT service nginx start && bash

@@ -121,10 +121,11 @@ ralphw/javafunc     latest              a8099c430c6f        2 days ago          
 
 ## Starting the container interactively
 
-Once the setup is done, the image can be started to either generate the required scaffolding or do simply invoke the generated function within the function runtime. Hence, when the function is started by the runtime, a port for the function will be exposed. In this particular example, the runtime decided to use port 7071. Therefore the container is started mapping the machines port 7071 to the containers port 7071. In addition to the port a local folder is mapped to a folder within the container. This allows to have the generated code being written to the machines disk, where also an integration to a source code repository like git can be leveraged. Not mapping the  folder would mean, that the generated content is lost once the container is deleted. 
+Once the setup is done, the image can be started to either generate the required scaffolding or do simply invoke the generated function within the function runtime. Hence, when the function is started by the runtime, a port for the function will be exposed. In this particular example, the runtime decided to use port 7071 as a default. Though simply exposing 7071 would not work since the docker image chosen here is having multiple interfaces. To fix that, nginx is configured to listen to all nic's on 8080 and is forwarding to localhost:7071 respectively.
+Therefore the container is started mapping the machines port 7071 to the containers port 8080 where nginx is listening. In addition to the port a local folder is mapped to a folder within the container. This allows to have the generated code being written to the machines disk, where also an integration to a source code repository like git can be leveraged. Not mapping the  folder would mean, that the generated content is lost once the container is deleted. 
 
 ```bash
-docker run -it -p 7071:7071 -v C:\Work\git\CSA-OCP-GER\functions-with-java:/app ralphw/javafunc
+docker run -it -p 7071:8080 -v C:\Work\git\CSA-OCP-GER\functions-with-java:/app ralphw/javafunc
 ```
 ## Generating the java function
 
