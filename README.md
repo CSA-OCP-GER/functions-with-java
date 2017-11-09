@@ -175,6 +175,11 @@ appRegion: westeurope
 [INFO] ------------------------------------------------------------------------
 ```
 
+This is what the generated contend looks like:
+
+![alt text](media/function-structure.PNG)
+
+
 ## Starting the generated function
 
 Once the code is in place the function can be built and started using maven
@@ -345,6 +350,7 @@ Hello, AzureFunctions
 
 ```
 Resources generated in Azure:
+
 ![alt text](media/function-resources.PNG)
 
 That's it. The sample function is deployed to azure and ready to run. All is done within a docker container. Thanks to that it is completely hassle free since no dependencies on the dev machine get messed up.
