@@ -175,7 +175,7 @@ appRegion: westeurope
 [INFO] ------------------------------------------------------------------------
 ```
 
-This is what the generated contend looks like:
+This is what the generated content looks like:
 
 ![alt text](media/function-structure.PNG)
 
